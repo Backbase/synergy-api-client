@@ -24,7 +24,7 @@
         <lombok.version>1.18.12</lombok.version>
         <commons.lang3.version>3.10</commons.lang3.version>
         <commons.text.version>1.9</commons.text.version>
-        <spock.version>2.0-M3-groovy-2.5</spock.version>
+        <spock.version>2.0-groovy-3.0</spock.version>
         <byte-buddy.version>1.10.21</byte-buddy.version>
         <cglib.version>3.3.0</cglib.version>
         <objenesis.version>3.0.1</objenesis.version>
