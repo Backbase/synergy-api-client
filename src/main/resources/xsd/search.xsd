@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="Search">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="InstLst"/>
+                <xs:element ref="DateLst"/>
+                <xs:element ref="CabAppLst"/>
+                <xs:element ref="TypeRptLst"/>
+                <xs:element ref="SearchItemLst"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InstLst">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Inst"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Inst" type="xs:integer"/>
+    <xs:element name="DateLst">
+        <xs:complexType/>
+    </xs:element>
+    <xs:element name="CabAppLst">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="CabApp"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CabApp" type="xs:string"/>
+    <xs:element name="TypeRptLst">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="TypeRpt"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="TypeRpt" type="xs:string"/>
+    <xs:element name="SearchItemLst">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="SearchItem"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SearchItem">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ItemName"/>
+                <xs:element ref="Compare"/>
+                <xs:element ref="ItemVal"/>
+                <xs:element minOccurs="0" ref="Connector"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ItemName" type="xs:string"/>
+    <xs:element name="Compare" type="xs:string"/>
+    <xs:element name="ItemVal" type="xs:string"/>
+    <xs:element name="Connector" type="xs:string"/>
+</xs:schema>

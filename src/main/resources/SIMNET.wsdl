@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.profitstars.com/Synergy/SIMNET/V1" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.profitstars.com/Synergy/SIMNET/V1" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synergy Web Service</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.profitstars.com/Synergy/SIMNET/V1">
+      <s:element name="GetItemBySearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SynAuthenticationInfo" type="tns:SynAuthenticationInfo" />
+            <s:element minOccurs="0" maxOccurs="1" name="SearchName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SavedSearchType" type="tns:SynSearchEnums" />
+            <s:element minOccurs="0" maxOccurs="1" name="SearchParamXML" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SearchTimeout" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="SynItemRequestObj" type="tns:SynItemRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SynAuthenticationInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserPassword" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Org" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileRoom" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WinUserName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Workstation" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Application" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ValidationCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrgAlias" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SynSearchEnums">
+        <s:restriction base="s:string">
+          <s:enumeration value="SIM_SEARCHTYPE_SAVED" />
+          <s:enumeration value="SIM_SEARCHTYPE_SYSTEM" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="SynItemRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Options" type="tns:ArrayOfSynOptionEnums" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartPage" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumberOfPages" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Extension" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSynOptionEnums">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SynOptionEnums" type="tns:SynOptionEnums" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SynOptionEnums">
+        <s:restriction base="s:string">
+          <s:enumeration value="SIM_OPTIONS_ANNOTATIONS" />
+          <s:enumeration value="SIM_OPTIONS_OVERLAY" />
+          <s:enumeration value="SIM_OPTIONS_GREENBAR" />
+          <s:enumeration value="SIM_OPTIONS_CROPPING" />
+          <s:enumeration value="SIM_OPTIONS_BYSTATEMENT" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetItemBySearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetItemBySearchResult" type="tns:SynError" />
+            <s:element minOccurs="0" maxOccurs="1" name="Buffer" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="OutSynItemObjs" type="tns:ArrayOfSynItem" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SynError">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorCode" type="tns:SynErrorEnums" />
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorLevel" type="tns:SynErrorLevelEnums" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMsg" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SynErrorEnums">
+        <s:restriction base="s:string">
+          <s:enumeration value="SIM_ERROR_NONE" />
+          <s:enumeration value="SIM_ERROR_UNKNOWN" />
+          <s:enumeration value="SIM_ERROR_SYSTEM" />
+          <s:enumeration value="SIM_ERROR_SESSION_INVALID" />
+          <s:enumeration value="SIM_ERROR_SIGNON_FAILURE" />
+          <s:enumeration value="SIM_ERROR_SIGNON_CHANGEPASSWORD" />
+          <s:enumeration value="SIM_ERROR_SIGNON_ACCOUNT_LOCKED" />
+          <s:enumeration value="SIM_ERROR_SIGNON_NO_LICENSES" />
+          <s:enumeration value="SIM_ERROR_INVALID_DATA" />
+          <s:enumeration value="SIM_ERROR_SEARCH_NOT_FOUND" />
+          <s:enumeration value="SIM_ERROR_NOACCESS" />
+          <s:enumeration value="SIM_ERROR_INVALID_EXTENSION" />
+          <s:enumeration value="SIM_ERROR_INVALID_HITS_PAGE" />
+          <s:enumeration value="SIM_WARNING_NO_ITEMS_FOUND" />
+          <s:enumeration value="SIM_WARNING_NO_HITS_FOUND" />
+          <s:enumeration value="SIM_WARNING_MULTIPLE_HITS_FOUND" />
+          <s:enumeration value="SIM_ERR_MULTIPLE_PROMPTS" />
+          <s:enumeration value="SIM_ERR_NO_POWER_SEARCH_KEYWORDS" />
+          <s:enumeration value="SIM_ERR_NO_POWER_SEARCH_KBS" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="SynErrorLevelEnums">
+        <s:restriction base="s:string">
+          <s:enumeration value="SIM_ERRORLEVEL_ERROR" />
+          <s:enumeration value="SIM_ERRORLEVEL_WARNING" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfSynItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SynItem" nillable="true" type="tns:SynItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SynItem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Source" type="tns:SynSourceEnums" />
+          <s:element minOccurs="0" maxOccurs="1" name="Inst" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReportDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ApplicationCabinet" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReportType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DocID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="PageNumber" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalPages" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Extension" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FilePath" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SynSourceEnums">
+        <s:restriction base="s:string">
+          <s:enumeration value="SIM_DOCUMENT_MODULE" />
+          <s:enumeration value="SIM_REPORT_MODULE" />
+          <s:enumeration value="SIM_CHECK_MODULE" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SynAuthenticationInfo" type="tns:SynAuthenticationInfo" />
+            <s:element minOccurs="0" maxOccurs="1" name="SynItemObjIn" type="tns:SynItem" />
+            <s:element minOccurs="0" maxOccurs="1" name="SynItemRequestObj" type="tns:SynItemRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetItemResult" type="tns:SynError" />
+            <s:element minOccurs="0" maxOccurs="1" name="SynItemObjOut" type="tns:SynItem" />
+            <s:element minOccurs="0" maxOccurs="1" name="Buffer" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfigurationTest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfigurationTestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConfigurationTestResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetItemBySearchSoapIn">
+    <wsdl:part name="parameters" element="tns:GetItemBySearch" />
+  </wsdl:message>
+  <wsdl:message name="GetItemBySearchSoapOut">
+    <wsdl:part name="parameters" element="tns:GetItemBySearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetItemSoapIn">
+    <wsdl:part name="parameters" element="tns:GetItem" />
+  </wsdl:message>
+  <wsdl:message name="GetItemSoapOut">
+    <wsdl:part name="parameters" element="tns:GetItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConfigurationTestSoapIn">
+    <wsdl:part name="parameters" element="tns:ConfigurationTest" />
+  </wsdl:message>
+  <wsdl:message name="ConfigurationTestSoapOut">
+    <wsdl:part name="parameters" element="tns:ConfigurationTestResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SIMNETWebServiceSoap">
+    <wsdl:operation name="GetItemBySearch">
+      <wsdl:input message="tns:GetItemBySearchSoapIn" />
+      <wsdl:output message="tns:GetItemBySearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItem">
+      <wsdl:input message="tns:GetItemSoapIn" />
+      <wsdl:output message="tns:GetItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfigurationTest">
+      <wsdl:input message="tns:ConfigurationTestSoapIn" />
+      <wsdl:output message="tns:ConfigurationTestSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SIMNETWebServiceSoap" type="tns:SIMNETWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetItemBySearch">
+      <soap:operation soapAction="http://www.profitstars.com/Synergy/SIMNET/V1/GetItemBySearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItem">
+      <soap:operation soapAction="http://www.profitstars.com/Synergy/SIMNET/V1/GetItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfigurationTest">
+      <soap:operation soapAction="http://www.profitstars.com/Synergy/SIMNET/V1/ConfigurationTest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SIMNETWebServiceSoap12" type="tns:SIMNETWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetItemBySearch">
+      <soap12:operation soapAction="http://www.profitstars.com/Synergy/SIMNET/V1/GetItemBySearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItem">
+      <soap12:operation soapAction="http://www.profitstars.com/Synergy/SIMNET/V1/GetItem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfigurationTest">
+      <soap12:operation soapAction="http://www.profitstars.com/Synergy/SIMNET/V1/ConfigurationTest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SIMNETWebService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Synergy Web Service</wsdl:documentation>
+    <wsdl:port name="SIMNETWebServiceSoap" binding="tns:SIMNETWebServiceSoap">
+      <soap:address location="https://synergy-synfo.corp.additionfi.com/SIMNET/SIMNET.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SIMNETWebServiceSoap12" binding="tns:SIMNETWebServiceSoap12">
+      <soap12:address location="https://synergy-synfo.corp.additionfi.com/SIMNET/SIMNET.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

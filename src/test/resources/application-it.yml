@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    discovery:
+      enabled: false
+logging:
+  level:
+    com.backbase: INFO
+    org.springframework: INFO
+backbase:
+  communication:
+    logRequests: true
+    logReplies: true
+    logEventEmit: true
+    logEventReceive: true
